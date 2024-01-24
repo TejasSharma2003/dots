@@ -119,10 +119,10 @@ keys = [
 
 
     # Notifications
-    Key(["control"], "space", lazy.spawn("dunstctl close")),
-    Key(["control", "shift"], "space", lazy.spawn("dunstctl close-all")),
-    Key(["control", "shift"], "period", lazy.spawn("dunstctl context")),
-    Key(["control"], "grave", lazy.spawn("dunstctl history-pop")),
+    Key([mod], "space", lazy.spawn("dunstctl close")),
+    Key([mod, "shift"], "space", lazy.spawn("dunstctl close-all")),
+    # Key([mod, "shift"], "period", lazy.spawn("dunstctl context")),
+    Key([mod], "grave", lazy.spawn("dunstctl history-pop")),
 
     # Switching back and fourth between workspaces
     Key([mod], "tab", lazy.function(latest_group)),
@@ -136,16 +136,16 @@ keys = [
     Key([mod], "i", lazy.layout.grow()),
     Key([mod], "d", lazy.layout.shrink()),
     Key([mod], "r", lazy.layout.reset()),
-    Key([mod], "space", lazy.layout.maximize()),
-    Key([mod, "shift"], "space", lazy.layout.flip()),
+    # Key([mod], "space", lazy.layout.maximize()),
+    # Key([mod, "shift"], "space", lazy.layout.flip()),
 
     # Open excalidraw
     Key([mod, "shift"], "n", lazy.spawn(
         "firefox --new-window https://excalidraw.com")),
 
-    # Open chatgpt
-    Key([], "XF86Search", lazy.spawn(
-        "firefox --new-window https://chat.openai.com/")),
+    # Open figma
+    Key([mod, "shift"], "f", lazy.spawn(
+        "prime-run firefox --new-window https://figma.com")),
 ]
 
 groups = [Group(i) for i in "1234567890"]
@@ -178,6 +178,8 @@ groups.append(ScratchPad("scratchpad", [
              width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("term2", "alacritty --class=scratch", width=0.8,
              height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("timer", "gnome-clocks", width=0.8,
+             height=0.8, x=0.1, y=0.1, opacity=1),
 ]))
 
 # Scratchpad keybindings
@@ -185,12 +187,13 @@ keys.extend([
     Key([mod], "s", lazy.group['scratchpad'].dropdown_toggle('spotify')),
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
     Key([mod, "shift"], "t", lazy.group['scratchpad'].dropdown_toggle('term2')),
+    Key([], "XF86AudioStop", lazy.group['scratchpad'].dropdown_toggle('timer')),
 ])
 
 
 layout_theme = {
     "border_width": 1,
-    "margin": 5,
+    "margin": 10,
     "border_focus": "#26233a",
     "border_normal": "#1f1d2e"
 }
