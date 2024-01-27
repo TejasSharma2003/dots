@@ -1,7 +1,6 @@
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, layout, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 import os
 import subprocess
 
@@ -146,6 +145,9 @@ keys = [
     # Open figma
     Key([mod, "shift"], "f", lazy.spawn(
         "prime-run firefox --new-window https://figma.com")),
+
+    Key([], "XF86Search", lazy.spawn(
+        "prime-run firefox --new-window https://chat.openai.com")),
 ]
 
 groups = [Group(i) for i in "1234567890"]
@@ -234,18 +236,18 @@ def init_screens():
 
 screens = init_screens()
 
-# Drag floating layouts.
+# Drag floating layouts."
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(),
          start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([mod], "Button1", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
+follow_mouse_focus = True
 bring_front_click = True
 floats_kept_above = True
 cursor_warp = False
